@@ -6,15 +6,20 @@
     android:paddingRight="16dp"
     android:orientation="vertical" >
 
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        android:
-    </fragment>
-    <Button
-        android:text="@string/results"
-        android:id="@+id/btnResults"
+    <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/zerotime"
+        android:textSize="30sp" />
+
+    <fragment
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/redbutton"
+        android:name="hu.bme.aut.reflexion.fragments.ButtonRedFragment"
+        >
+    </fragment>
 
 </LinearLayout>
