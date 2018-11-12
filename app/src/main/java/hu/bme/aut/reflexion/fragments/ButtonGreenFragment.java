@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import hu.bme.aut.reflexion.R;
 
-public class ButtonGreenFragment extends Fragment {
+public class ButtonGreenFragment extends android.support.v4.app.Fragment {
 
     public ButtonGreenFragment() {
         // Required empty public constructor
