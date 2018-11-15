@@ -4,25 +4,21 @@
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:orientation="vertical" >
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/zerotime"
-        android:textSize="30sp" />
+    android:orientation="vertical"
+    android:weightSum="3">
 
     <fragment
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:name="hu.bme.aut.reflexion.fragments.ButtonRedFragment"
-        android:id="@+id/redButtonFragment"></fragment>
-    <Button
-        android:id="@+id/replaceTestButton"
+        android:layout_width="match_parent"
+        android:id="@+id/TimerFragment"
+        android:name="hu.bme.aut.reflexion.fragments.TimeFragment"
+        android:layout_weight="1"/>
+
+    <fragment
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Replace Test" />
+        android:layout_weight="2"
+        android:name="hu.bme.aut.reflexion.fragments.ButtonRedFragment"
+        android:id="@+id/redButtonFragment" />
 
 </LinearLayout>
