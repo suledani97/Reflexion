@@ -14,11 +14,13 @@
         android:name="hu.bme.aut.reflexion.fragments.TimeFragment"
         android:layout_weight="1"/>
 
-    <fragment
+    <Button
+        android:id="@+id/btnMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/redbutton"
+        android:layout_marginTop="80dp"
         android:layout_weight="2"
-        android:name="hu.bme.aut.reflexion.fragments.ButtonRedFragment"
-        android:id="@+id/redButtonFragment" />
+        android:text="@string/press_wrong" />
 
 </LinearLayout>
