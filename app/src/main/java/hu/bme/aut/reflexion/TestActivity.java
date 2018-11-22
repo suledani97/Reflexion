@@ -1,6 +1,7 @@
 package hu.bme.aut.reflexion;
 
 import android.os.Handler;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,7 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import hu.bme.aut.reflexion.fragments.DialogFragment;
 import hu.bme.aut.reflexion.timer.StopwatchTask;
 
 public class TestActivity extends AppCompatActivity {
@@ -39,13 +41,21 @@ public class TestActivity extends AppCompatActivity {
                 bigButton.setText(R.string.press_done);
                 bigButton.setBackgroundResource(R.drawable.yellowbutton);
                 updateTimer.cancel();
+                showDialogFragment();
             }
         });
+    }
+
+    private void showDialogFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        DialogFragment dialogFragment = new DialogFragment();
+        dialogFragment.show(fragmentManager, "fragment_dialog");
     }
 
     private void changeButtonStatus(){
         bigButton.setBackgroundResource(R.drawable.greenbutton);
         bigButton.setText(R.string.press_right);
+        bigButton.setEnabled(true);
     }
 
     private void changeButtonAfter(int delay_ms){
