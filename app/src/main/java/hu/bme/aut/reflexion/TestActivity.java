@@ -1,12 +1,15 @@
 package hu.bme.aut.reflexion;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 import java.util.Timer;
@@ -75,5 +78,11 @@ public class TestActivity extends AppCompatActivity {
         updateTimer = new Timer();
         StopwatchTask stopwatch = new StopwatchTask(this, timerText, startTime);
         updateTimer.scheduleAtFixedRate(stopwatch,0, 1);
+    }
+
+    public void fragmentButtonPressed(EditText nickname){
+        Toast.makeText(getApplicationContext(), "Result saved", Toast.LENGTH_LONG).show();
+        Intent gameEndIntent = new Intent(TestActivity.this, MenuActivity.class);
+        startActivity(gameEndIntent);
     }
 }
