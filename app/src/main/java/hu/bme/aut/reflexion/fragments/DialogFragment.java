@@ -36,7 +36,7 @@ public class DialogFragment extends android.support.v4.app.DialogFragment {
                 .setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ((TestActivity)getActivity()).fragmentButtonPressed(nameInput);
+                        ((TestActivity)getActivity()).fragmentButtonPressed(String.valueOf(nameInput.getText()));
                     }
                 })
                 .setNegativeButton(R.string.cancel, null)

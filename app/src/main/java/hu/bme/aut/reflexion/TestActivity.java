@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,8 +16,12 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import hu.bme.aut.reflexion.data.ResultData;
 import hu.bme.aut.reflexion.fragments.DialogFragment;
 import hu.bme.aut.reflexion.timer.StopwatchTask;
+import io.realm.Realm;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
 
 public class TestActivity extends AppCompatActivity {
 
@@ -80,8 +85,22 @@ public class TestActivity extends AppCompatActivity {
         updateTimer.scheduleAtFixedRate(stopwatch,0, 1);
     }
 
-    public void fragmentButtonPressed(EditText nickname){
-        Toast.makeText(getApplicationContext(), "Result saved", Toast.LENGTH_LONG).show();
+    public void fragmentButtonPressed(String nickname){
+        Realm realm = Realm.getDefaultInstance();
+        Log.i("Realm", realm.getPath());
+        RealmQuery<ResultData> query = realm.where(ResultData.class);
+        query.equalTo("name", nickname);
+
+        ResultData nickData = query.findFirst();
+        realm.beginTransaction();
+        if (nickData == null){
+            ResultData newData = realm.createObject(ResultData.class);
+            newData.setName(nickname);
+        }
+        realm.commitTransaction();
+        realm.close();
+
+        Toast.makeText(getApplicationContext(), "Result saved, name: "+nickname, Toast.LENGTH_LONG).show();
         Intent gameEndIntent = new Intent(TestActivity.this, MenuActivity.class);
         startActivity(gameEndIntent);
     }
