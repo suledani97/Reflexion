@@ -1,5 +1,6 @@
 package hu.bme.aut.reflexion;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
@@ -20,10 +21,11 @@ import hu.bme.aut.reflexion.data.ResultData;
 import hu.bme.aut.reflexion.fragments.DialogFragment;
 import hu.bme.aut.reflexion.timer.StopwatchTask;
 import io.realm.Realm;
+import io.realm.RealmList;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
-public class TestActivity extends AppCompatActivity {
+public class TestActivity extends AppCompatActivity implements hu.bme.aut.reflexion.interfaces.DialogInterface{
 
     private static int RANDOM_TIME_LOWER_MS = 2000;
     private static int RANDOM_TIME_UPPER_MS = 10000;
@@ -85,22 +87,32 @@ public class TestActivity extends AppCompatActivity {
         updateTimer.scheduleAtFixedRate(stopwatch,0, 1);
     }
 
+    @Override
     public void fragmentButtonPressed(String nickname){
+        String timeString = String.valueOf(timerText.getText());
+        String[] timeString_split = timeString.split(":");
+        timeString_split[0] = timeString_split[0].trim();
+        timeString_split[1] = timeString_split[1].trim();
+
+        int time = Integer.parseInt(timeString_split[0])*1000+Integer.parseInt(timeString_split[1]);
+
         Realm realm = Realm.getDefaultInstance();
-        Log.i("Realm", realm.getPath());
         RealmQuery<ResultData> query = realm.where(ResultData.class);
         query.equalTo("name", nickname);
-
-        ResultData nickData = query.findFirst();
+        RealmResults<ResultData> nickData = query.findAll();
         realm.beginTransaction();
-        if (nickData == null){
+        if (nickData.size() == 0){
             ResultData newData = realm.createObject(ResultData.class);
             newData.setName(nickname);
+            newData.addTimeToCollection(time);
+        }
+        else{
+           nickData.get(0).addTimeToCollection(time);
         }
         realm.commitTransaction();
         realm.close();
 
-        Toast.makeText(getApplicationContext(), "Result saved, name: "+nickname, Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Result saved", Toast.LENGTH_LONG).show();
         Intent gameEndIntent = new Intent(TestActivity.this, MenuActivity.class);
         startActivity(gameEndIntent);
     }

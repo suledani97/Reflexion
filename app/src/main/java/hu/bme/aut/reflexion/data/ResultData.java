@@ -12,8 +12,16 @@ public class ResultData extends RealmObject {
         times = new RealmList<Integer>();
     }
 
+    public String getName(){
+        return name;
+    }
+
     public void setName(String name){
         this.name = name;
+    }
+
+    public RealmList<Integer> getCollection(){
+        return times;
     }
 
     public void addTimeToCollection(Integer time){

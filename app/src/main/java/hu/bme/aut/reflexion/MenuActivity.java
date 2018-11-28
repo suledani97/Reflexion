@@ -17,12 +17,21 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         Button startButton = findViewById(R.id.btnStart);
+        Button resultButton = findViewById(R.id.btnResults);
 
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent testIntent = new Intent(MenuActivity.this, TestActivity.class);
                 startActivity(testIntent);
+            }
+        });
+
+        resultButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent resultIntent = new Intent(MenuActivity.this, ResultActivity.class);
+                startActivity(resultIntent);
             }
         });
 
